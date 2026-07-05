@@ -1,4 +1,3 @@
-CREATE DATABASE cinema_db;
 CREATE TABLE IF NOT EXISTS movies (
                                       id BIGSERIAL PRIMARY KEY,
                                       title VARCHAR(255) NOT NULL,
