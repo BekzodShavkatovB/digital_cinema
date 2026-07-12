@@ -7,7 +7,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "movies")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Movie {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +23,7 @@ public class Movie {
     private String description;
 
     @Column(nullable = false)
-    private Integer durationMinutes;
+    private Integer duration;
 
     private LocalDate releaseDate;
 

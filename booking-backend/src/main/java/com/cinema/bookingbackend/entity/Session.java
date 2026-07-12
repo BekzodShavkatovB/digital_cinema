@@ -5,7 +5,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 @Entity
 @Table(name = "sessions")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Session {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

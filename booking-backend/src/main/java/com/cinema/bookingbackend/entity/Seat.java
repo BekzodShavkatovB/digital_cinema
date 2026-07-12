@@ -4,12 +4,16 @@ import lombok.*;
 import java.util.List;
 @Entity
 @Table(name = "seats")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Seat {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int rowNumber;
-    private int seatNumber;
+    private int seatNum;
 
     @ManyToOne
     @JoinColumn(name = "hall_id")
