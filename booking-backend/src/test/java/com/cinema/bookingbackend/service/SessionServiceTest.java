@@ -32,26 +32,18 @@ class SessionServiceTest {
     @Test
     @DisplayName("Успешное добавление сеанса, если зал свободен")
     void scheduleSession_Success() {
-        // Given
-        Movie movie = Movie.builder().id(1L).duration(120).build();
-        Hall hall = Hall.builder().id(1L).build();
+        Movie movie = new Movie(1L, "Inception", 120);
+        Hall hall = new Hall(1L, "Main Hall", 100);
         LocalDateTime startTime = LocalDateTime.of(2026, 7, 20, 18, 0);
 
-        Session newSession = Session.builder()
-                .movie(movie)
-                .hall(hall)
-                .startTime(startTime)
-                .build();
+        Session newSession = new Session(null, startTime, movie, hall);
 
-        // Настраиваем мок: на это время пересечений нет (пустой список)
         when(sessionRepository.findOverlappingSessions(anyLong(), any(), any()))
                 .thenReturn(Collections.emptyList());
         when(sessionRepository.save(newSession)).thenReturn(newSession);
 
-        // When
         Session result = sessionService.scheduleSession(newSession);
 
-        // Then
         assertNotNull(result);
         verify(sessionRepository, times(1)).save(newSession);
     }
@@ -59,27 +51,19 @@ class SessionServiceTest {
     @Test
     @DisplayName("Ошибка добавления сеанса: Время пересекается с существующим сеансом")
     void scheduleSession_ThrowsInvalidSessionTimeException() {
-        // Given
-        Movie movie = Movie.builder().id(1L).duration(120).build();
-        Hall hall = Hall.builder().id(1L).build();
+        Movie movie = new Movie(1L, "Inception", 120);
+        Hall hall = new Hall(1L, "Main Hall", 100);
         LocalDateTime startTime = LocalDateTime.of(2026, 7, 20, 18, 0);
 
-        Session newSession = Session.builder()
-                .movie(movie)
-                .hall(hall)
-                .startTime(startTime)
-                .build();
+        Session newSession = new Session(null, startTime, movie, hall);
 
-        // Настраиваем мок: возвращаем список с существующим сеансом-конфликтом
         when(sessionRepository.findOverlappingSessions(anyLong(), any(), any()))
                 .thenReturn(List.of(new Session()));
 
-        // When & Then
         assertThrows(InvalidSessionTimeException.class, () -> {
             sessionService.scheduleSession(newSession);
         });
 
-        // Убеждаемся, что до сохранения дело не дошло
         verify(sessionRepository, never()).save(any());
     }
 }

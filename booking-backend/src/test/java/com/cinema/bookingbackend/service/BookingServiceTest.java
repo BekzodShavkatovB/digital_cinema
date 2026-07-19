@@ -44,19 +44,9 @@ class BookingServiceTest {
         Long sessionId = 1L;
         Long seatId = 1L;
 
-        Session mockSession = Session.builder()
-                .id(sessionId)
-                .movie(new Movie())
-                .hall(new Hall())
-                .startTime(LocalDateTime.now())
-                .build();
-
-        Seat mockSeat = Seat.builder()
-                .id(seatId)
-                .rowNumber(1)
-                .seatNum(10)
-                .hall(new Hall())
-                .build();        Booking mockSavedBooking = Booking.builder().id(100L).session(mockSession).seat(mockSeat).build();
+        Session mockSession = new Session(sessionId, LocalDateTime.now(), new Movie(), new Hall());
+        Seat mockSeat = new Seat(seatId, 1, 10, new Hall());
+        Booking mockSavedBooking = new Booking(100L, null, mockSession, mockSeat);
 
         when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(mockSession));
         when(seatRepository.findById(seatId)).thenReturn(Optional.of(mockSeat));
@@ -82,19 +72,9 @@ class BookingServiceTest {
         Long sessionId = 1L;
         Long seatId = 1L;
 
-        Session mockSession = Session.builder()
-                .id(sessionId)
-                .movie(new Movie())
-                .hall(new Hall())
-                .startTime(LocalDateTime.now())
-                .build();
+        Session mockSession = new Session(sessionId, LocalDateTime.now(), new Movie(), new Hall());
+        Seat mockSeat = new Seat(seatId, 1, 10, new Hall());
 
-        Seat mockSeat = Seat.builder()
-                .id(seatId)
-                .rowNumber(1)
-                .seatNum(10)
-                .hall(new Hall())
-                .build();
         when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(mockSession));
         when(seatRepository.findById(seatId)).thenReturn(Optional.of(mockSeat));
         when(bookingRepository.existsBySessionIdAndSeatId(sessionId, seatId)).thenReturn(true);

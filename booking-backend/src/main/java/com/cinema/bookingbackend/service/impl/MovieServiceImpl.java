@@ -4,17 +4,17 @@ import com.cinema.bookingbackend.entity.Movie;
 import com.cinema.bookingbackend.exception.ResourceNotFoundException;
 import com.cinema.bookingbackend.repository.MovieRepository;
 import com.cinema.bookingbackend.service.MovieService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
-@RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
+
+    public MovieServiceImpl(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     @Override
     @Transactional

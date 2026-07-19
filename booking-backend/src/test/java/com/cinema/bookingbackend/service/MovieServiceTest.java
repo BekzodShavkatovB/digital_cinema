@@ -29,8 +29,8 @@ class MovieServiceTest {
     @Test
     @DisplayName("Успешное сохранение нового фильма")
     void saveMovie_Success() {
-        Movie movie = Movie.builder().title("Inception").duration(148).build();
-        Movie savedMovie = Movie.builder().id(1L).title("Inception").duration(148).build();
+        Movie movie = new Movie(null, "Inception", 148);
+        Movie savedMovie = new Movie(1L, "Inception", 148);
         when(movieRepository.save(any(Movie.class))).thenReturn(savedMovie);
 
         Movie result = movieService.saveMovie(movie);
@@ -45,7 +45,7 @@ class MovieServiceTest {
     @DisplayName("Успешный поиск фильма по существующему ID")
     void getMovieById_Success() {
         Long movieId = 1L;
-        Movie movie = Movie.builder().id(movieId).title("Inception").build();
+        Movie movie = new Movie(movieId, "Inception", 148);
 
         when(movieRepository.findById(movieId)).thenReturn(Optional.of(movie));
 

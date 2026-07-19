@@ -1,32 +1,30 @@
 package com.cinema.bookingbackend.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "movies")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Movie {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String title;
-
-    @Column(length = 1000)
-    private String description;
-
-    @Column(nullable = false)
     private Integer duration;
 
-    private LocalDate releaseDate;
+    public Movie() {}
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private List<Session> sessions;
+    public Movie(Long id, String title, Integer duration) {
+        this.id = id;
+        this.title = title;
+        this.duration = duration;
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public Integer getDuration() { return duration; }
+    public void setDuration(Integer duration) { this.duration = duration; }
 }

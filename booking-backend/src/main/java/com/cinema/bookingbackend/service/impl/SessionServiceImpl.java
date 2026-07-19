@@ -4,7 +4,6 @@ import com.cinema.bookingbackend.entity.Session;
 import com.cinema.bookingbackend.exception.InvalidSessionTimeException;
 import com.cinema.bookingbackend.repository.SessionRepository;
 import com.cinema.bookingbackend.service.SessionService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,10 +11,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
 
     private final SessionRepository sessionRepository;
+
+    public SessionServiceImpl(SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
+    }
 
     @Override
     @Transactional
