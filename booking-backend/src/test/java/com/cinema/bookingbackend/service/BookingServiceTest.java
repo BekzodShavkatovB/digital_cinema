@@ -44,8 +44,8 @@ class BookingServiceTest {
         Long sessionId = 1L;
         Long seatId = 1L;
 
-        Session mockSession = new Session(sessionId, LocalDateTime.now(), new Movie(), new Hall());
-        Seat mockSeat = new Seat(seatId, 1, 10, new Hall());
+        Session mockSession = new Session(sessionId, LocalDateTime.now(), new Movie(), new Hall(null, null, null, null));
+        Seat mockSeat = new Seat(seatId, 1, 10, new Hall(null, null, null, null));
         Booking mockSavedBooking = new Booking(100L, null, mockSession, mockSeat);
 
         when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(mockSession));
@@ -72,8 +72,8 @@ class BookingServiceTest {
         Long sessionId = 1L;
         Long seatId = 1L;
 
-        Session mockSession = new Session(sessionId, LocalDateTime.now(), new Movie(), new Hall());
-        Seat mockSeat = new Seat(seatId, 1, 10, new Hall());
+        Session mockSession = new Session(sessionId, LocalDateTime.now(), new Movie(), new Hall(null, null, null, null));
+        Seat mockSeat = new Seat(seatId, 1, 10, new Hall(null, null, null, null));
 
         when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(mockSession));
         when(seatRepository.findById(seatId)).thenReturn(Optional.of(mockSeat));

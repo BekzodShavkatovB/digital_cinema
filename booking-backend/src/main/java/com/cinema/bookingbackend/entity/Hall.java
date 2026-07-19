@@ -11,12 +11,17 @@ public class Hall {
     private String name;
     private Integer capacity;
 
+    @ManyToOne
+    @JoinColumn(name = "cinema_id")
+    private Cinema cinema;
+
     public Hall() {}
 
-    public Hall(Long id, String name, Integer capacity) {
+    public Hall(Long id, String name, Integer capacity, Cinema cinema) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
+        this.cinema = cinema;
     }
 
     public Long getId() { return id; }
@@ -27,4 +32,7 @@ public class Hall {
 
     public Integer getCapacity() { return capacity; }
     public void setCapacity(Integer capacity) { this.capacity = capacity; }
+
+    public Cinema getCinema() { return cinema; }
+    public void setCinema(Cinema cinema) { this.cinema = cinema; }
 }

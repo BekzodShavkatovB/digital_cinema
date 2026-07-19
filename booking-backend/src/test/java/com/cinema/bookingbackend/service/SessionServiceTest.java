@@ -33,7 +33,7 @@ class SessionServiceTest {
     @DisplayName("Успешное добавление сеанса, если зал свободен")
     void scheduleSession_Success() {
         Movie movie = new Movie(1L, "Inception", 120);
-        Hall hall = new Hall(1L, "Main Hall", 100);
+        Hall hall = new Hall(1L, "Main Hall", 100, null);
         LocalDateTime startTime = LocalDateTime.of(2026, 7, 20, 18, 0);
 
         Session newSession = new Session(null, startTime, movie, hall);
@@ -52,7 +52,7 @@ class SessionServiceTest {
     @DisplayName("Ошибка добавления сеанса: Время пересекается с существующим сеансом")
     void scheduleSession_ThrowsInvalidSessionTimeException() {
         Movie movie = new Movie(1L, "Inception", 120);
-        Hall hall = new Hall(1L, "Main Hall", 100);
+        Hall hall = new Hall(1L, "Main Hall", 100, null);
         LocalDateTime startTime = LocalDateTime.of(2026, 7, 20, 18, 0);
 
         Session newSession = new Session(null, startTime, movie, hall);
